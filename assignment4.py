@@ -3,7 +3,6 @@ seattle_stationcode = 'GHCND:US1WAKG0038'
 # Loading the .json file into python
 with open('ucaccmet2j_python/precipitation.json', encoding='utf8') as file:
     data = json.load(file)
-precipitation_empty = []
 month_dict = {}
 for measurement in data:
     if (measurement['station']) == seattle_stationcode:
@@ -11,12 +10,13 @@ for measurement in data:
         precipitation = int(measurement['value'])
     # Creating a dictionary with 'key' = month and 'value' = values
         if month in month_dict.keys():
-            month[month] += precipitation
+            month_dict[month] += precipitation
         else:
-            month[month] = precipitation
-month_list = list(month_dict)
+            month_dict[month] = precipitation
+month_list = list(month_dict.values())
 print(month_list)
-
+with open('seattlerainfall.json', 'w', encoding='utf8') as file:
+    json.dump(month_List, file)
     
         # precipitation_month = precipitation_empty.append(int(measurement['value']))
 # print(sum(precipitation_month))
