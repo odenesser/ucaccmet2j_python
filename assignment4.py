@@ -14,12 +14,16 @@ for measurement in data:
         else:
             month_dict[month] = precipitation
 month_list = list(month_dict.values())
-print(month_list)
-with open('seattlerainfall.json', 'w', encoding='utf8') as file:
-    json.dump(month_List, file)
-    
-        # precipitation_month = precipitation_empty.append(int(measurement['value']))
-# print(sum(precipitation_month))
-# print(month)
 
-# if statement that looks at month date and go to next set and if it is same month, add the value to the list of precipitation values.
+with open('seattlerainfall.json', 'w', encoding='utf8') as file:
+    json.dump(month_list, file)
+    
+     # Part 2
+precipitation_year = sum(month_list)
+print(precipitation_year)
+    # relative precipitation per month
+precipitation_month = [x / precipitation_year for x in month_list] 
+print(precipitation_month)
+# Saving part 2 as .json file
+with open('seattle_rainfall_year.json', 'w', encoding='utf8') as file:
+    json.dump(precipitation_month, file)
